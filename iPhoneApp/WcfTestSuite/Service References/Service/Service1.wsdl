@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s0="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://tempuri.org/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" name="Service1" targetNamespace="http://tempuri.org/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xs:schema xmlns:tns="http://tempuri.org/Imports" targetNamespace="http://tempuri.org/Imports" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import schemaLocation="http://192.168.43.245/WcfWebApp/Service1.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xs:import schemaLocation="http://192.168.43.245/WcfWebApp/Service1.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xs:import schemaLocation="http://192.168.43.245/WcfWebApp/Service1.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WcfWebApp.Models" />
+    </xs:schema>
+  </types>
+  <message name="IService1_DoWork_InputMessage">
+    <part name="parameters" element="tns:DoWork" />
+  </message>
+  <message name="IService1_DoWork_OutputMessage">
+    <part name="parameters" element="tns:DoWorkResponse" />
+  </message>
+  <message name="IService1_GetUsers_InputMessage">
+    <part name="parameters" element="tns:GetUsers" />
+  </message>
+  <message name="IService1_GetUsers_OutputMessage">
+    <part name="parameters" element="tns:GetUsersResponse" />
+  </message>
+  <message name="IService1_GetTasks_InputMessage">
+    <part name="parameters" element="tns:GetTasks" />
+  </message>
+  <message name="IService1_GetTasks_OutputMessage">
+    <part name="parameters" element="tns:GetTasksResponse" />
+  </message>
+  <message name="IService1_UploadImage_InputMessage">
+    <part name="parameters" element="tns:UploadImage" />
+  </message>
+  <message name="IService1_UploadImage_OutputMessage">
+    <part name="parameters" element="tns:UploadImageResponse" />
+  </message>
+  <portType name="IService1">
+    <operation name="DoWork">
+      <input wsaw:Action="http://tempuri.org/IService1/DoWork" message="tns:IService1_DoWork_InputMessage" />
+      <output wsaw:Action="http://tempuri.org/IService1/DoWorkResponse" message="tns:IService1_DoWork_OutputMessage" />
+    </operation>
+    <operation name="GetUsers">
+      <input wsaw:Action="http://tempuri.org/IService1/GetUsers" message="tns:IService1_GetUsers_InputMessage" />
+      <output wsaw:Action="http://tempuri.org/IService1/GetUsersResponse" message="tns:IService1_GetUsers_OutputMessage" />
+    </operation>
+    <operation name="GetTasks">
+      <input wsaw:Action="http://tempuri.org/IService1/GetTasks" message="tns:IService1_GetTasks_InputMessage" />
+      <output wsaw:Action="http://tempuri.org/IService1/GetTasksResponse" message="tns:IService1_GetTasks_OutputMessage" />
+    </operation>
+    <operation name="UploadImage">
+      <input wsaw:Action="http://tempuri.org/IService1/UploadImage" message="tns:IService1_UploadImage_InputMessage" />
+      <output wsaw:Action="http://tempuri.org/IService1/UploadImageResponse" message="tns:IService1_UploadImage_OutputMessage" />
+    </operation>
+  </portType>
+  <binding name="BasicHttpBinding_IService1" type="tns:IService1">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="DoWork">
+      <soap:operation soapAction="http://tempuri.org/IService1/DoWork" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetUsers">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetUsers" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetTasks">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetTasks" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="UploadImage">
+      <soap:operation soapAction="http://tempuri.org/IService1/UploadImage" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="Service1">
+    <port name="BasicHttpBinding_IService1" binding="tns:BasicHttpBinding_IService1">
+      <soap:address location="http://192.168.43.245/WcfWebApp/Service1.svc" />
+    </port>
+  </service>
+</definitions>
