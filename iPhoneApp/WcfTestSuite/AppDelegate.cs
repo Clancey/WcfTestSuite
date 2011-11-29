@@ -46,15 +46,33 @@ namespace WcfTestSuite
 			window.RootViewController = navigation;
 			window.MakeKeyAndVisible ();
 			
-			client = new Service1Client (new BasicHttpBinding (), new EndpointAddress ("http://192.168.2.17/WcfWebApp/Service1.svc"));
+			client = new Service1Client (new BasicHttpBinding (), new EndpointAddress ("http://192.168.2.8/WcfWebApp/Service1.svc"));
 			client.GetUsersCompleted += HandleClientGetUsersCompleted;
 			client.GetTasksCompleted += HandleClientGetTasksCompleted;
 			client.UploadImageCompleted += HandleClientUploadImageCompleted;
+			client.ConvertToByteArrayCompleted += HandleClientConvertToByteArrayCompleted;
 			
 			
 			loading = new MBProgressHUD();
 			loading.TitleText = "Loading";
 			return true;
+		}
+
+		void HandleClientConvertToByteArrayCompleted (object sender, ConvertToByteArrayCompletedEventArgs e)
+		{
+			loading.Hide(true);
+			if(e.Error != null)
+			{
+				var alert = new UIAlertView("Error",e.Error.Message,null,"Ok");
+				alert.Show();
+				return;
+			}
+			System.Text.UTF8Encoding enc = new System.Text.UTF8Encoding();
+			var str = enc.GetString(e.Result);
+			var successAlert = new UIAlertView("Sucess",str,null,"Ok");
+			successAlert.Show();
+			return;
+
 		}
 		
 		RootElement createRoot ()
@@ -69,6 +87,10 @@ namespace WcfTestSuite
 					new StringElement ("Get Tasks", delegate {
 						loading.Show(true);
 						client.GetTasksAsync (1);
+					}),
+					new StringElement("Convert String To Bytes",delegate {
+						loading.Show(true);
+						client.ConvertToByteArrayAsync("It Works!!!");
 					}),
 				},
 				new Section ()
