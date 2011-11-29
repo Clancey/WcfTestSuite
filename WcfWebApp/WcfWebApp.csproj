@@ -82,7 +82,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49514</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/WcfWebApp</IISUrl>
+          <IISUrl>http://localhost/WcfTestSuite</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -22,7 +22,10 @@ namespace WcfWebApp
         TaskList GetTasks(int userId);
 
         [OperationContract]
-        bool UploadImage(ImageData imageData); 
+        bool UploadImage(ImageData imageData);
+
+        [OperationContract]
+        byte[] ConvertToByteArray(string theString);
 
     }
 }

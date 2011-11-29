@@ -220,6 +220,11 @@ public interface IService1
     System.IAsyncResult BeginUploadImage(WcfWebApp.Models.ImageData imageData, System.AsyncCallback callback, object asyncState);
     
     bool EndUploadImage(System.IAsyncResult result);
+    
+    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IService1/ConvertToByteArray", ReplyAction="http://tempuri.org/IService1/ConvertToByteArrayResponse")]
+    System.IAsyncResult BeginConvertToByteArray(string theString, System.AsyncCallback callback, object asyncState);
+    
+    byte[] EndConvertToByteArray(System.IAsyncResult result);
 }
 
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -298,6 +303,29 @@ public partial class UploadImageCompletedEventArgs : System.ComponentModel.Async
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
+public partial class ConvertToByteArrayCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+{
+    
+    private object[] results;
+    
+    public ConvertToByteArrayCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+            base(exception, cancelled, userState)
+    {
+        this.results = results;
+    }
+    
+    public byte[] Result
+    {
+        get
+        {
+            base.RaiseExceptionIfNecessary();
+            return ((byte[])(this.results[0]));
+        }
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
 public partial class Service1Client : System.ServiceModel.ClientBase<IService1>, IService1
 {
     
@@ -324,6 +352,12 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
     private EndOperationDelegate onEndUploadImageDelegate;
     
     private System.Threading.SendOrPostCallback onUploadImageCompletedDelegate;
+    
+    private BeginOperationDelegate onBeginConvertToByteArrayDelegate;
+    
+    private EndOperationDelegate onEndConvertToByteArrayDelegate;
+    
+    private System.Threading.SendOrPostCallback onConvertToByteArrayCompletedDelegate;
     
     private BeginOperationDelegate onBeginOpenDelegate;
     
@@ -397,6 +431,8 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
     public event System.EventHandler<GetTasksCompletedEventArgs> GetTasksCompleted;
     
     public event System.EventHandler<UploadImageCompletedEventArgs> UploadImageCompleted;
+    
+    public event System.EventHandler<ConvertToByteArrayCompletedEventArgs> ConvertToByteArrayCompleted;
     
     public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
     
@@ -625,6 +661,63 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
                     imageData}, this.onEndUploadImageDelegate, this.onUploadImageCompletedDelegate, userState);
     }
     
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    System.IAsyncResult IService1.BeginConvertToByteArray(string theString, System.AsyncCallback callback, object asyncState)
+    {
+        return base.Channel.BeginConvertToByteArray(theString, callback, asyncState);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    byte[] IService1.EndConvertToByteArray(System.IAsyncResult result)
+    {
+        return base.Channel.EndConvertToByteArray(result);
+    }
+    
+    private System.IAsyncResult OnBeginConvertToByteArray(object[] inValues, System.AsyncCallback callback, object asyncState)
+    {
+        string theString = ((string)(inValues[0]));
+        return ((IService1)(this)).BeginConvertToByteArray(theString, callback, asyncState);
+    }
+    
+    private object[] OnEndConvertToByteArray(System.IAsyncResult result)
+    {
+        byte[] retVal = ((IService1)(this)).EndConvertToByteArray(result);
+        return new object[] {
+                retVal};
+    }
+    
+    private void OnConvertToByteArrayCompleted(object state)
+    {
+        if ((this.ConvertToByteArrayCompleted != null))
+        {
+            InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+            this.ConvertToByteArrayCompleted(this, new ConvertToByteArrayCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+        }
+    }
+    
+    public void ConvertToByteArrayAsync(string theString)
+    {
+        this.ConvertToByteArrayAsync(theString, null);
+    }
+    
+    public void ConvertToByteArrayAsync(string theString, object userState)
+    {
+        if ((this.onBeginConvertToByteArrayDelegate == null))
+        {
+            this.onBeginConvertToByteArrayDelegate = new BeginOperationDelegate(this.OnBeginConvertToByteArray);
+        }
+        if ((this.onEndConvertToByteArrayDelegate == null))
+        {
+            this.onEndConvertToByteArrayDelegate = new EndOperationDelegate(this.OnEndConvertToByteArray);
+        }
+        if ((this.onConvertToByteArrayCompletedDelegate == null))
+        {
+            this.onConvertToByteArrayCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnConvertToByteArrayCompleted);
+        }
+        base.InvokeAsync(this.onBeginConvertToByteArrayDelegate, new object[] {
+                    theString}, this.onEndConvertToByteArrayDelegate, this.onConvertToByteArrayCompletedDelegate, userState);
+    }
+    
     private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState)
     {
         return ((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(callback, asyncState);
@@ -776,6 +869,21 @@ public partial class Service1Client : System.ServiceModel.ClientBase<IService1>,
         {
             object[] _args = new object[0];
             bool _result = ((bool)(base.EndInvoke("UploadImage", _args, result)));
+            return _result;
+        }
+        
+        public System.IAsyncResult BeginConvertToByteArray(string theString, System.AsyncCallback callback, object asyncState)
+        {
+            object[] _args = new object[1];
+            _args[0] = theString;
+            System.IAsyncResult _result = base.BeginInvoke("ConvertToByteArray", _args, callback, asyncState);
+            return _result;
+        }
+        
+        public byte[] EndConvertToByteArray(System.IAsyncResult result)
+        {
+            object[] _args = new object[0];
+            byte[] _result = ((byte[])(base.EndInvoke("ConvertToByteArray", _args, result)));
             return _result;
         }
     }
