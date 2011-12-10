@@ -45,8 +45,23 @@ namespace WcfTestSuite
 			navigation.PushViewController(dvc,false);
 			window.RootViewController = navigation;
 			window.MakeKeyAndVisible ();
+			//Set a binding with a large timeout and allows a large data set
+			var binding = new BasicHttpBinding (){Name= "basicHttp",MaxReceivedMessageSize = 67108864,};
+			binding.ReaderQuotas = new System.Xml.XmlDictionaryReaderQuotas(){
+				MaxArrayLength = 2147483646,
+				MaxDepth =32,
+				MaxBytesPerRead = 4096,
+				MaxNameTableCharCount = 5242880,
+				MaxStringContentLength = 5242880,		
 			
-			client = new Service1Client (new BasicHttpBinding (), new EndpointAddress ("http://192.168.2.8/WcfWebApp/Service1.svc"));
+			};
+			//one hour timeout, this is way to long but you get the point
+			var timeout = new TimeSpan(1,0,0);
+			binding.SendTimeout= timeout;
+			binding.OpenTimeout = timeout;
+			binding.ReceiveTimeout = timeout;
+			
+			client = new Service1Client (binding, new EndpointAddress ("http://192.168.2.8/WcfWebApp/Service1.svc"));
 			client.GetUsersCompleted += HandleClientGetUsersCompleted;
 			client.GetTasksCompleted += HandleClientGetTasksCompleted;
 			client.UploadImageCompleted += HandleClientUploadImageCompleted;

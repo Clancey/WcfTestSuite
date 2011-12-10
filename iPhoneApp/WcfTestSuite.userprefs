@@ -1,10 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="WcfTestSuite/AppDelegate.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../../../../../Developer/MonoTouch/Source/mono/mcs/class/System.ServiceModel/System.ServiceModel/ClientRuntimeChannel.cs">
     <Files>
-      <File FileName="WcfTestSuite/AppDelegate.cs" Line="30" Column="14" />
+      <File FileName="WcfTestSuite/AppDelegate.cs" Line="49" Column="98" />
       <File FileName="WcfTestSuite/Service1.cs" Line="1" Column="1" />
       <File FileName="WcfTestSuite/Main.cs" Line="1" Column="1" />
+      <File FileName="../../../../../../Developer/MonoTouch/Source/mono/mcs/class/System.ServiceModel/System.ServiceModel/ClientRuntimeChannel.cs" Line="2" Column="27" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
